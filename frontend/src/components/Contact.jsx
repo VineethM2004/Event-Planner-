@@ -10,6 +10,7 @@ const Contact = () => {
 
   const handleSendMessage = async (e) => {
     e.preventDefault();
+    console.log("Send button clicked!"); // Debugging
     await axios
       .post(
         "https://event-planner-cls3.onrender.com/api/v1/message/send",
@@ -32,9 +33,10 @@ const Contact = () => {
         setSubject("");
       })
       .catch((error) => {
-        toast.error(error.response.data.message);
+        toast.error(error.response?.data?.message || "Error sending message");
       });
   };
+  
 
   return (
     <>

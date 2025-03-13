@@ -12,6 +12,7 @@ app.use(
       origin: [process.env.FRONTEND_URL],
       methods: ["POST"],
       credentials: true,
+      allowedHeaders: ["Content-Type", "Authorization"],
     })
   );
 

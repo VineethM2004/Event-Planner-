@@ -274,6 +274,8 @@ nav svg {
   font-family: "Alex Brush", cursive;
   border: none;
   width: fit-content;
+  pointer-events: auto !important;
+  cursor: pointer;
 }
 .contact .banner:last-child .item form input:focus,
 .contact .banner:last-child .item form textarea:focus {
