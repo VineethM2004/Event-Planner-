@@ -11,8 +11,14 @@ const Contact = () => {
   const handleSendMessage = async (e) => {
     e.preventDefault();
     console.log("Send button clicked!"); // Debugging
-    await axios
-      .post(
+  
+    if (!name || !email || !subject || !message) {
+      toast.error("All fields are required!");
+      return;
+    }
+  
+    try {
+      const res = await axios.post(
         "https://event-planner-cls3.onrender.com/api/v1/message/send",
         {
           name,
@@ -24,18 +30,17 @@ const Contact = () => {
           withCredentials: true,
           headers: { "Content-Type": "application/json" },
         }
-      )
-      .then((res) => {
-        toast.success(res.data.message);
-        setName("");
-        setEmail("");
-        setMessage("");
-        setSubject("");
-      })
-      .catch((error) => {
-        toast.error(error.response?.data?.message || "Error sending message");
-      });
-  };
+      );
+      toast.success(res.data.message || "Message sent successfully!");
+      setName("");
+      setEmail("");
+      setMessage("");
+      setSubject("");
+    } catch (error) {
+      console.error(error); // Debugging
+      toast.error(error.response?.data?.message || "Error sending message");
+  }
+};
   
 
   return (
