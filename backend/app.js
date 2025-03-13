@@ -10,8 +10,8 @@ dotenv.config({ path: "./config/config.env" });
 
 app.use(
     cors({
-      origin: "https://event-planner-liart.vercel.app/",
-      credentials: true, // Allow cookies if needed
+      origin: "https://event-planner-liart.vercel.app",
+      credentials: true, 
     })
   );
 app.options("*", cors());
