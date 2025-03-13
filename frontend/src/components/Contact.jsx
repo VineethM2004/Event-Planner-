@@ -9,39 +9,34 @@ const Contact = () => {
   const [message, setMessage] = useState("");
 
   const handleSendMessage = async (e) => {
-    e.preventDefault();
-    console.log("Send button clicked!"); // Debugging
-  
-    if (!name || !email || !subject || !message) {
-      toast.error("All fields are required!");
-      return;
-    }
-  
-    try {
-      const res = await axios.post(
-        "https://event-planner-cls3.onrender.com/api/v1/message/send",
-        {
-          name,
-          email,
-          subject,
-          message,
-        },
-        {
-          withCredentials: true,
-          headers: { "Content-Type": "application/json" },
-        }
-      );
-      toast.success(res.data.message || "Message sent successfully!");
+  e.preventDefault();
+  console.log("Send button clicked!"); // Debugging
+  await axios
+    .post(
+      "https://event-planner-cls3.onrender.com/api/v1/message/send",
+      {
+        name,
+        email,
+        subject,
+        message,
+      },
+      {
+        withCredentials: true,
+        headers: { "Content-Type": "application/json" },
+      }
+    )
+    .then((res) => {
+      toast.success(res.data.message);
       setName("");
       setEmail("");
       setMessage("");
       setSubject("");
-    } catch (error) {
-      console.error(error); // Debugging
+    })
+    .catch((error) => {
       toast.error(error.response?.data?.message || "Error sending message");
-  }
+    });
 };
-  
+
 
   return (
     <>
