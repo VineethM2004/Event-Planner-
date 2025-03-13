@@ -1,9 +1,8 @@
-
+import express from "express";
 import { dbConnection } from "./database/dbConnection.js";
 import dotenv from "dotenv";
 import messageRouter from "./router/messageRouter.js";
-const express = require('express');
-const cors = require('cors');
+import cors from "cors";
 const app = express();
 
 dotenv.config({ path: "./config/config.env" });
@@ -11,7 +10,7 @@ dotenv.config({ path: "./config/config.env" });
 app.use(
     cors({
       origin: "https://event-planner-liart.vercel.app",
-      credentials: true, 
+      credentials: true, // Allow cookies if needed
     })
   );
 app.options("*", cors());
